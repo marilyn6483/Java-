@@ -1,10 +1,5 @@
 package javaTest;
 
-
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Array {
@@ -66,12 +61,34 @@ public class Array {
 		
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder res = new StringBuilder();
+		res.append(String.format("Array: size = %d , capacity = %d\n", size, data.length));
+		res.append('[');
+		for (int i=0; i <= size-1; i++) {
+			res.append(data[i]);
+			if (i != size - 1) {
+				res.append(',');
+			}
+		}
+		res.append(']');
+		return res.toString();
+		}
 	
-	
-	
-		
-
-	    
+	int get(int index) {
+		if (index < 0 || index > size) {
+			throw new IllegalArgumentException("Index is Illegal");
+		}
+		return data[index];
+	}
+	void set(int index, int e) {
+		if (index < 0 || index > size) {
+			throw new IllegalArgumentException("Index is Illegal");
+		}
+		data[index] = e;
+	}
+	   
 	
 }
 
