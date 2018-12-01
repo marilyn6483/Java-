@@ -45,10 +45,10 @@ public class Array {
     //	向指定位置添加元素
 	public void add(int index, int e) {
 		if(size == data.length) {
-			throw new IllegalArgumentException("addLast failed.Array is full");
+			throw new IllegalArgumentException("add failed.Array is full");
 		}
 		if (index > size || index < 0) {
-			throw new IllegalArgumentException("addLast failed.Index error");
+			throw new IllegalArgumentException("add failed.Index error");
 		}
 		
 		//指定位置的元素向后移动
@@ -77,16 +77,59 @@ public class Array {
 		}
 	
 	int get(int index) {
-		if (index < 0 || index > size) {
+		if (index < 0 || index >= size) {
 			throw new IllegalArgumentException("Index is Illegal");
 		}
 		return data[index];
 	}
 	void set(int index, int e) {
-		if (index < 0 || index > size) {
+		if (index < 0 || index >= size) {
 			throw new IllegalArgumentException("Index is Illegal");
 		}
 		data[index] = e;
+	}
+	
+//	是否包含某个元素
+	public boolean contains(int e) {
+		
+		for (int i=0; i<size; i++) {
+			if (data[i] == e)
+				return true;		
+		}
+		return false;
+		
+	}
+	
+//	查找指定元素的索引
+	public int find(int e) {
+		for (int i=0; i<size; i++) {
+			if (data[i] == e)
+				return i;		
+		}
+		return -1;
+	}
+	
+//	删除元素，并返回被删除的元素
+	public int remove(int index) {
+		
+		if(index < 0 || index >= size) {
+			throw new IllegalArgumentException("Illegal index.");
+		}
+		
+		int num = data[index];
+		for(int i=index+1; i<size; i++) {
+			data[i-1] = data[i];
+		}
+		size--;
+		return num;
+	}
+	
+	public void removeElement(int e) {
+		
+		if (contains(e)) {
+			   int index = find(e);
+			   remove(index);
+		   }
 	}
 	   
 	
