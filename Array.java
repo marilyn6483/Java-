@@ -2,12 +2,13 @@ package javaTest;
 
 import java.util.*;
 
-public class Array {
-	private int[] data;
+public class Array<E> {
+//	使用泛型
+	private E[] data;
 	private int size;
 	
 	public Array(int capacity) {
-		data = new int[capacity];
+		data = (E[]) new Object[capacity];
 		size = 0;
 	}
 	
@@ -29,7 +30,7 @@ public class Array {
 	}
 	
     //	添加元素,向末尾添加一个元素
-	public void addLast(int e) {
+	public void addLast(E e) {
 //		if(size == data.length) {
 //			throw new IllegalArgumentException("addLast failed.Array is full");
 //		}
@@ -38,12 +39,12 @@ public class Array {
 		add(size, e);
 	}
 	
-	public void addFirst(int e) {
+	public void addFirst(E e) {
 		add(0, e);
 	}
 	
     //	向指定位置添加元素
-	public void add(int index, int e) {
+	public void add(int index, E e) {
 		if(size == data.length) {
 			throw new IllegalArgumentException("add failed.Array is full");
 		}
@@ -76,13 +77,13 @@ public class Array {
 		return res.toString();
 		}
 	
-	int get(int index) {
+	E get(int index) {
 		if (index < 0 || index >= size) {
 			throw new IllegalArgumentException("Index is Illegal");
 		}
 		return data[index];
 	}
-	void set(int index, int e) {
+	void set(int index, E e) {
 		if (index < 0 || index >= size) {
 			throw new IllegalArgumentException("Index is Illegal");
 		}
@@ -90,10 +91,10 @@ public class Array {
 	}
 	
 //	是否包含某个元素
-	public boolean contains(int e) {
+	public boolean contains(E e) {
 		
 		for (int i=0; i<size; i++) {
-			if (data[i] == e)
+			if (data[i].equals(e))
 				return true;		
 		}
 		return false;
@@ -101,22 +102,22 @@ public class Array {
 	}
 	
 //	查找指定元素的索引
-	public int find(int e) {
+	public int find(E e) {
 		for (int i=0; i<size; i++) {
-			if (data[i] == e)
+			if (data[i].equals(e))
 				return i;		
 		}
 		return -1;
 	}
 	
 //	删除元素，并返回被删除的元素
-	public int remove(int index) {
+	public E remove(int index) {
 		
 		if(index < 0 || index >= size) {
 			throw new IllegalArgumentException("Illegal index.");
 		}
 		
-		int num = data[index];
+		E num = data[index];
 		for(int i=index+1; i<size; i++) {
 			data[i-1] = data[i];
 		}
@@ -124,7 +125,7 @@ public class Array {
 		return num;
 	}
 	
-	public void removeElement(int e) {
+	public void removeElement(E e) {
 		
 		if (contains(e)) {
 			   int index = find(e);
