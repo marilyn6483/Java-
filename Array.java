@@ -85,6 +85,15 @@ public class Array<E> {
 		}
 		return data[index];
 	}
+	
+	E getFirst() {
+		return get(0);
+	}
+	
+	E getLast() {
+		return get(size-1);
+	}
+	
 	void set(int index, E e) {
 		if (index < 0 || index >= size) {
 			throw new IllegalArgumentException("Index is Illegal");
