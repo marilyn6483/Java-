@@ -45,17 +45,19 @@ public class Array<E> {
 	
     //	向指定位置添加元素
 	public void add(int index, E e) {
-		if(size == data.length) {
-			throw new IllegalArgumentException("add failed.Array is full");
-		}
+		
 		if (index > size || index < 0) {
 			throw new IllegalArgumentException("add failed.Index error");
+		}
+		
+		if(size == data.length) {
+//			throw new IllegalArgumentException("add failed.Array is full");
+			resize(2 * data.length);
 		}
 		
 		//指定位置的元素向后移动
 		for(int i=size-1; i>= index; i--) {
 			data[i+1] = data[i];
-			
 		}
 	    data[index] = e;
 		size++;
@@ -132,7 +134,23 @@ public class Array<E> {
 			   remove(index);
 		   }
 	}
-	   
+	
+	public E removeFirst() {
+		return remove(0);
+	}
+	
+	public E removeLast() {
+		return remove(size - 1);
+	}
+	
+	private void resize(int newCapacity) {
+		E[] newData = (E[]) new Object[newCapacity];
+		for (int i = 0; i < size; i++) {
+			newData[i] = data[i];
+		}
+		data = newData;
+	}
+	
 	
 }
 
