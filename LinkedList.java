@@ -115,9 +115,7 @@ public class LinkedList<E> {
 		
 		boolean contain = false;
 		
-        Node cur = dummyhead.next;
-		
-		for (int i = 0; i < size; i++) {
+		for (Node cur = dummyhead.next; cur != null ; cur = cur.next) {
 			cur = cur.next;
 			if (e.equals(cur.e)) {
 				contain = true;
@@ -154,6 +152,8 @@ public class LinkedList<E> {
 		System.out.println(list);
 		list.add(2, 666);
 		System.out.println(list);
+		System.out.println(list.get(2));
+		System.out.println(list.contains(66));
 	}
 	
 
