@@ -62,21 +62,13 @@ public class LinkedList<E> {
 			throw new IllegalArgumentException("Add failed. Illegal index.");
 		}
 
-//			Node prv = head;
-			Node prv = dummyhead;
-			for(int i = 0; i < index; i++) {
-				prv = prv.next;
-				
-
+		Node prv = dummyhead;
+		for(int i = 0; i < index; i++) {
+			prv = prv.next;
 			
-//			Node node = new Node(e);
-//			node.next = prv.next;
-//			prv.next = node;
-			prv.next = new Node(e, prv.next);
-			
-			
-			size++;
 		}
+        prv.next = new Node(e, prv.next);
+		size++;
 		
 	}
 	
@@ -84,6 +76,85 @@ public class LinkedList<E> {
 		add(size, e);
 	}
 	
+	public E get(int index) {
+		if (index < 0 || index >= size) {
+			throw new IllegalArgumentException("Index error");
+		}
+		
+		Node cur = dummyhead.next;
+		for (int i = 0; i < index; i++) {
+			cur = cur.next;
+		}
+		
+		return cur.e;
+	}
+	
+	public E getFirst() {
+		return get(0);
+	}
+	
+	public E getLast() {
+		return get(size-1);
+	}
+	
+	//更新index位置的元素为e， 不常用
+	public void set(int index, E e) {
+		if (index < 0 || index >= size) {
+			throw new IllegalArgumentException("Index error");
+		}
+		
+		Node cur = dummyhead.next;
+		
+		for (int i = 0; i < index; i++) {
+			cur = cur.next;
+		}
+		cur.e = e;
+	}
+	
+	public boolean contains(E e) {
+		
+		boolean contain = false;
+		
+        Node cur = dummyhead.next;
+		
+		for (int i = 0; i < size; i++) {
+			cur = cur.next;
+			if (e.equals(cur.e)) {
+				contain = true;
+				return contain;
+			}
+		}
+		
+		return contain;
+		
+	}
+	
+	@Override
+	public String toString() {	
+		
+		StringBuilder res = new StringBuilder();
+		res.append("LinkedList ");
+		// 使用for循环
+		// for (Node cur = dummyhead.next; cur != null; cur = cur.next)
+		Node cur = dummyhead.next;
+		while(cur != null) {
+			res.append(cur + "->");
+			cur = cur.next;
+		}
+		res.append("NULL");
+		return res.toString();
+	}
+	
+	//test
+	public static void main(String[] args) {
+		LinkedList<Integer> list = new LinkedList<>();
+		for (int i = 0; i < 5; i++) {
+			list.addFirst(i);
+		}
+		System.out.println(list);
+		list.add(2, 666);
+		System.out.println(list);
+	}
 	
 
 	
