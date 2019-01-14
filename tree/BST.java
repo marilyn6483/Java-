@@ -42,7 +42,7 @@ public class BST<E extends Comparable<E>>  {
 		
 		if (node == null) {
 			size++;
-			//将这个节点挂到这棵二叉树上，需要将这个节点返回给调用者
+			//将这个节点挂到这棵二叉树上，   需要将这个节点返回给调用者
 			return new Node(e);
 		}
 		
@@ -53,9 +53,7 @@ public class BST<E extends Comparable<E>>  {
 			node.right = add(node.right, e);
 		}
 		
-		return node;
-		
-		
+		return node;	
 	}
 	
 	//查询元素
@@ -79,6 +77,35 @@ public class BST<E extends Comparable<E>>  {
 //		else if (e.compareTo(node.e) < 0) {
 			return contains(node.left, e);
 		}
+	}
+	
+	//二分搜索树的前序遍历
+	public void preOrder() {
+		preOrder(root);
+	}
+	
+	private void preOrder(Node node) {
+		if (node == null) {
+			return;
+		}
+		
+		System.out.println(node.e);
+		preOrder(node.left);
+		preOrder(node.right);
+	}
+	
+	//中序遍历
+	public void inOder() {
+		inOrder(root);
+	}
+	
+	private void inOrder(Node node) {
+		if (node == null) {
+			return;
+		}
+		inOrder(node.left);
+		System.out.println(node.e);
+		inOrder(node.right);
 	}
 
 }
